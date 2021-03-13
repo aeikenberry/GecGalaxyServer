@@ -1,0 +1,128 @@
+{
+    "players": 2,
+    "name": "DOON",
+    "stars": [
+        {
+            "x": 65.183,
+            "y": 169.434,
+            "id": 0,
+            "ships": 50,
+            "player": 0,
+            "class": "Star",
+            "connections": [
+                1,
+                2
+            ]
+        },
+        {
+            "x": 174.784,
+            "y": 254.287,
+            "id": 1,
+            "ships": 50,
+            "player": 0,
+            "class": "Star",
+            "connections": [
+                0,
+                2
+            ]
+        },
+        {
+            "x": 175.491,
+            "y": 73.975,
+            "id": 2,
+            "ships": 50,
+            "player": 0,
+            "class": "Star",
+            "connections": [
+                0,
+                3,
+                4
+            ]
+        },
+        {
+            "x": 282.551,
+            "y": 162.737,
+            "id": 3,
+            "ships": 50,
+            "player": 0,
+            "class": "Star",
+            "connections": [
+                1,
+                2,
+                5
+            ]
+        },
+        {
+            "x": 174.077,
+            "y": 167.313,
+            "id": 4,
+            "ships": 50,
+            "player": null,
+            "class": "Star",
+            "connections": [
+                2
+            ]
+        },
+        {
+            "x": 629.033,
+            "y": 168.393,
+            "id": 5,
+            "ships": 50,
+            "player": null,
+            "class": "Star",
+            "connections": [
+                3,
+                6,
+                8
+            ]
+        },
+        {
+            "x": 737.221,
+            "y": 78.591,
+            "id": 6,
+            "ships": 50,
+            "player": null,
+            "class": "Star",
+            "connections": [
+                5,
+                7
+            ]
+        },
+        {
+            "x": 853.894,
+            "y": 175.464,
+            "id": 7,
+            "ships": 50,
+            "player": 1,
+            "class": "Star",
+            "connections": [
+                6,
+                8
+            ]
+        },
+        {
+            "x": 734.252,
+            "y": 278.702,
+            "id": 8,
+            "ships": 50,
+            "player": 1,
+            "class": "Star",
+            "connections": [
+                5,
+                9,
+                7
+            ]
+        },
+        {
+            "x": 735.807,
+            "y": 175.464,
+            "id": 9,
+            "ships": 50,
+            "player": 1,
+            "class": "Star",
+            "connections": [
+                8
+            ]
+        }
+    ]
+}

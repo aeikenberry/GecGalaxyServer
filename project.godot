@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="GecGalaxyServer"
+run/main_scene="res://Scenes/Main/Server.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://Scenes/Singletons/Game.gd"
+Events="*res://Scenes/Singletons/Events.gd"
+MapLoader="*res://Scenes/Singletons/MapLoader.gd"
+GameTick="*res://Scenes/Singletons/GameTick.gd"
+Star="*res://Scenes/Singletons/Stars/Star.gd"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
