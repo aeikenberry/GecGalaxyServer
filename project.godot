@@ -26,6 +26,7 @@ Events="*res://Scenes/Singletons/Events.gd"
 MapLoader="*res://Scenes/Singletons/MapLoader.gd"
 GameTick="*res://Scenes/Singletons/GameTick.gd"
 Star="*res://Scenes/Singletons/Stars/Star.gd"
+Map="*res://Scenes/Singletons/Map.gd"
 
 [rendering]
 

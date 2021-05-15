@@ -1,6 +1,6 @@
 extends Node
 
-var map = {"stars": []}
+var map = {"stars": [], "players": 2, "name": "cool"}
 var players = {}
 var tick_timer
 var started = false
@@ -36,17 +36,16 @@ func _on_player_connected(peer_id, players):
 
 
 func _on_player_disconnected(peer_id):
-	var removed = players.erase(peer_id)
-	var new_key = "AI_" + str(peer_id)
-	players[new_key] = "AI"
-	game.players = players
-	Events.emit_signal("game_updated", game)
+	var removed = players.erase(str(peer_id))
 	
-	if removed:
+	if removed and players.size() < game.map.players:
+		var new_key = "AI_" + str(peer_id)
+		players[new_key] = "AI"
 		for star in game.map.stars:
 			if star.player == str(peer_id):
 				star.player = new_key
-		Events.emit_signal("game_updated", game)
+	
+	Events.emit_signal("game_updated", game)
 
 
 func GetGame():
@@ -65,6 +64,7 @@ func Start(player_data, map_name):
 		return
 
 	_setup_game(player_data, map_name)
+	Events.emit_signal("game_updated", game)
 	yield(get_tree().create_timer(1.0), "timeout")
 	Events.emit_signal("game_starting_in", 5)
 	yield(get_tree().create_timer(1.0), "timeout")
@@ -91,6 +91,7 @@ func _start_timer():
 	started = true
 	game["start_time"] = start_time
 	game["started"] = started
+	Events.emit_signal("game_updated", game)
 
 
 func _game_tick():
@@ -102,6 +103,7 @@ func _setup_game(player_data, map_name):
 	map = MapLoader.GetMapData(map_name)
 	players = player_data
 	game["map"] = map
+	Map.SetStars(map["stars"])
 	_set_game_players()
 	_set_starting_players()
 	Events.emit_signal("game_updated", game)

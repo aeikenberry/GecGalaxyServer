@@ -62,7 +62,13 @@ remote func Register(name):
 	var player_id = get_tree().get_rpc_sender_id()
 	
 	if players.empty():
-		host = player_id
+		host = str(player_id)
+	elif str(host).ends_with("_AI"):
+		host = str(player_id)
+	elif not host:
+		host = str(player_id)
+	else:
+		print('host: ' + str(host))
 	
 	players[str(player_id)] = name
 
@@ -77,7 +83,7 @@ remote func Register(name):
 remote func StartGame(map_name):
 	var player_id = get_tree().get_rpc_sender_id()
 	
-	if player_id != host:
+	if str(player_id) != host:
 		return
 	
 	Game.Start(players, map_name)
