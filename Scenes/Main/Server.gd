@@ -89,7 +89,7 @@ remote func Register(name):
 remote func StartGame(map_name):
 	var player_id = get_tree().get_rpc_sender_id()
 	
-	if str(player_id) != host:
+	if str(player_id) != str(host.id):
 		return
 	
 	Game.Start(players, map_name)

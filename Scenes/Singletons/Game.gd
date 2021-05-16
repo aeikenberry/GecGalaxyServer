@@ -22,13 +22,13 @@ func _ready():
 
 
 func _on_player_connected(peer_id, players):
-	for player in players:
-		var name = players[player]
+	for player_id in players:
+		var name = players[player_id].name
 		if name == "AI":
-			players.erase(player)
+			players.erase(player_id)
 			
 			for star in game.map.stars:
-				if star.player == str(player):
+				if star.player == str(player_id):
 					star.player = peer_id
 			# only remove 1
 			break
@@ -40,7 +40,11 @@ func _on_player_disconnected(peer_id):
 	
 	if removed and players.size() < game.map.players:
 		var new_key = "AI_" + str(peer_id)
-		players[new_key] = "AI"
+		players[new_key] = {
+			"name": "AI",
+			"ai": true,
+			"id": new_key
+		}
 		for star in game.map.stars:
 			if star.player == str(peer_id):
 				star.player = new_key
@@ -122,7 +126,11 @@ func _set_game_players():
 		
 		game.players = players
 		while added < map_players - player_size:
-			game.players[str(added) + "_AI"] = "AI"
+			game.players[str(added) + "_AI"] = {
+				"name": "AI",
+				"id": str(added) + "_AI",
+				"ai": true
+			}
 			added += 1
 	else:
 		# map_players is max. add the first players
