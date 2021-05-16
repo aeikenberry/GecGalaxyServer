@@ -43,7 +43,7 @@ func _Peer_Disconnected(peer_id):
 	print(str(peer_id) + " Peer Disconnected")
 	players.erase(peer_id)
 	
-	if str(host) == str(peer_id):
+	if str(host.id) == str(peer_id):
 		host = null
 	
 	if players.size() > 0:
@@ -61,16 +61,22 @@ remote func SayHi(requestor):
 remote func Register(name):
 	var player_id = get_tree().get_rpc_sender_id()
 	
+	var player = {
+		"name": name,
+		"id": player_id,
+		"ai": false
+	}
+	
 	if players.empty():
-		host = str(player_id)
-	elif str(host).ends_with("_AI"):
-		host = str(player_id)
+		host = player
+	elif host.ai:
+		host = player
 	elif not host:
-		host = str(player_id)
+		host = player
 	else:
 		print('host: ' + str(host))
 	
-	players[str(player_id)] = name
+	players[str(player_id)] = player
 
 	rpc_id(player_id, "RegisterSuccess", "Joined")
 	print("Conneced user " + str(player_id) + " as " + name)

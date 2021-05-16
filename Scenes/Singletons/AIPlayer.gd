@@ -1,10 +1,6 @@
 extends Node
 
-var playerName = ""
-var playerID = ""
-
-
-func Tick(game, star):
+func Tick(star):
 	"""
 	Typically, we want to be expand or attacking as a team.
 		A. Get the stars adjacent to me that are not owned by me.
