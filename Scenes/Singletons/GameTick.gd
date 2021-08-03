@@ -2,24 +2,26 @@ extends Node
 
 
 func Tick(game):
-	_do_ai_stars(game)
 	_do_orders(game)
 	_regen_ships(game)
 
 
 func _regen_ships(game):
 	for star in game["map"]["stars"]:
-		match star["class"]:
-			_:
-				star["ships"] = Star.regen(star["ships"])
-
-
-func _do_ai_stars(game):
-	for star in game["map"]["stars"]:
-		var player = Game.players[star.player]
-		if player.ai:
-			AiPlayer.Tick(star)
+		var ships_to_regen = Star.ships_to_regen(star)
+		star["ships"] = ships_to_regen
 
 
 func _do_orders(game):
-	pass
+	print("Doing tick")
+	for star in game["map"]["stars"]:
+		print(star)
+		if star.player == null:
+			print("NO PLAYER: " + str(star.id))
+			continue
+		var player = Game.players[star.player]
+		print(player)
+		if player.ai:
+			Star.DoAIOrder(star)
+		else:
+			Star.DoOrder(star)

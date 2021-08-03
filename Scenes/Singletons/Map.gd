@@ -10,6 +10,7 @@ func GetStarByID(star_id):
 
 func SetStars(stars):
 	for star in stars:
+		star.orders = null
 		_stars[star["id"]] = star
 
 func SetPlayers(players):
