@@ -15,12 +15,9 @@ func _regen_ships(game):
 func _do_orders(game):
 	print("Doing tick")
 	for star in game["map"]["stars"]:
-		print(star)
 		if star.player == null:
-			print("NO PLAYER: " + str(star.id))
 			continue
 		var player = Game.players[star.player]
-		print(player)
 		if player.ai:
 			Star.DoAIOrder(star)
 		else:

@@ -7,10 +7,10 @@ var started = false
 var start_time
 var host
 
-var game = { 
-	"map": map, 
-	"players": players, 
-	"started": started, 
+var game = {
+	"map": map,
+	"players": players,
+	"started": started,
 	"start_time": start_time,
 	"host": host
 }
@@ -26,7 +26,7 @@ func _on_player_connected(peer_id, players):
 		var player = players[player_id]
 		if player.ai:
 			players.erase(player)
-			
+
 			for star in game.map.stars:
 				if star.player == str(player.id):
 					star.player = peer_id
@@ -37,7 +37,7 @@ func _on_player_connected(peer_id, players):
 
 func _on_player_disconnected(peer_id):
 	var removed = players.erase(str(peer_id))
-	
+
 	if removed and players.size() < game.map.players:
 		var new_key = "AI_" + str(peer_id)
 		var player = {
@@ -49,7 +49,7 @@ func _on_player_disconnected(peer_id):
 		for star in game.map.stars:
 			if star.player == str(peer_id):
 				star.player = new_key
-	
+
 	Events.emit_signal("game_updated", game)
 
 
@@ -90,7 +90,7 @@ func _start_timer():
 	tick_timer.autostart = true
 	tick_timer.wait_time = 1.0
 	tick_timer.connect("timeout", self, "_game_tick")
-	
+
 	add_child(tick_timer)
 	start_time = OS.get_time()
 	started = true
@@ -118,13 +118,13 @@ func _set_game_players():
 	var map_players = map.players
 	var mapped_players = 0
 	var player_size = players.size()
-	
+
 	if map_players == player_size:
 		game.players = players
 	elif map_players > player_size:
 		# Will need to add AI Players
 		var added = 0
-		
+
 		game.players = players
 		while added < map_players - player_size:
 			var player = {
@@ -143,13 +143,13 @@ func _set_game_players():
 				new_players[peer_id] = players[peer_id]
 				added += 1
 		game.players = new_players
-	
+
 	Events.emit_signal("game_updated", game)
-	
+
 
 func _set_starting_players():
 	var player_ids = game.players.keys()
-	
+
 	for star in game.map.stars:
 		if star.player != null:
 			var player_index = int(star.player)
