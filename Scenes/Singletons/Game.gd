@@ -19,6 +19,12 @@ var game = {
 func _ready():
 	Events.connect("player_disconnected", self, "_on_player_disconnected")
 	Events.connect("player_joined", self, "_on_player_connected")
+	Events.connect("game_won", self, "_on_game_won")
+
+
+func _on_game_won(player_name):
+	print("We have a winner: " + player_name)
+	pass
 
 
 func _on_player_connected(peer_id, players):

@@ -4,6 +4,9 @@ extends Node
 func Tick(game):
 	_do_orders(game)
 	_regen_ships(game)
+	var player = _check_end(game)
+	if player != null:
+		Events.emit_signal("game_won", player)
 
 
 func _regen_ships(game):
@@ -22,3 +25,13 @@ func _do_orders(game):
 			Star.DoAIOrder(star)
 		else:
 			Star.DoOrder(star)
+
+func _check_end(game):
+	var owners = []
+	for star in game["map"]["stars"]:
+		owners.append(star.player)
+	
+	if len(owners) == 1:
+		return owners[0]
+	
+	return null

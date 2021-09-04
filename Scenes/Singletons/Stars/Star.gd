@@ -52,10 +52,23 @@ func move(star, target):
 
 
 func attack(star1, star2):
-	var attack_rate = (star2.ships / star1.ships) * .1
-	var removed_ships = star2.ships * attack_rate
+	var removed_ships = ceil(star2.ships - star1.ships)
 	if removed_ships > star2.ships:
 		removed_ships = star2.ships
-	star1.ships += removed_ships
-	star2.ships -= removed_ships
+	elif removed_ships == 0:
+		print("0")
+		removed_ships = 10
+	if removed_ships > 0:
+		star2.ships -= removed_ships
+	else:
+		if removed_ships > star1.ships:
+			star1.ships = 0
+		else:
+			star1.ships -= abs(float(removed_ships))
+	
+	if star1.ships == 0:
+		star1.player = star2.player
+	elif star2.ships == 0:
+		star2.player = star1.player
+
 	return [star1, star2]
